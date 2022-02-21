@@ -1,4 +1,4 @@
-jaffle_shop:
+jaffle_shop_postgres:
   target: dev
   outputs:
     dev:
