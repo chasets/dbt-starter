@@ -13,11 +13,10 @@ pip install -r requirements.txt
 
 # Getting Started
 
-Copy postgres profile from ./profiles.yml into your ~/.dbt/profile.yml
-
-Start-up the postgres container db we're going to use (requires docker):
+Start-up the postgres container db we're going to use (requires nerdctl or docker):
 ```
-docker compose up
+nerdctl volume create pgdata
+nerdctl compose up
 ```
 
 Note this will automatically execute the scripts that sets up the landing tables and source data.
@@ -29,7 +28,7 @@ The data is loaded from the tutorial csv's here `./data`
 Run DBT:
 ```
 cd jaffle_shop
-dbt run
+dbt run --profiles-dir ..
 ```
 
 you should see something like this:
@@ -81,12 +80,12 @@ Proceed with the tutorial to see how to create and load tables, run tests and mu
 # Tear Down
 
 ```
-docker compose down
+nerdctl compose down
 ```
 
 # Reset the DB
 
 ```
-docker compose down
-rm -r ./data/postgres/*
+nerdctl compose down
+nerdctl volumn rm pgdata
 ```
